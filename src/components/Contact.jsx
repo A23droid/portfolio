@@ -1,6 +1,7 @@
 import emailjs from '@emailjs/browser';
 import { motion } from 'motion/react';
 import { useContext, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { ThemeContext } from '../App';
 
 function Contact() {
@@ -27,8 +28,16 @@ function Contact() {
       .then((res) => {
         setIsLoading(false);
         console.log("Email sent: ", res.text);
+
+        ReactGA.event({
+        category: "Contact Form",
+        action: "Submit",
+        label: formData.email, // optional, useful for identifying users
+        })
+
         setFormData({name: '', email: '', message: ''});
         setToast({ type: 'success', message: 'Message sent successfully!' });
+
       }, (err) => {
         setIsLoading(false);
         console.log("Error sending email: ", err.text);
