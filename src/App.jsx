@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
-
+import React, { createContext, useState, useEffect, useRef, useMemo } from 'react';
+import { tsParticles } from '@tsparticles/engine';
+import { loadSlim } from '@tsparticles/slim';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero.jsx';
 import Projects from './components/Projects.jsx';
@@ -11,41 +12,212 @@ import AnalyticsTracker from './components/AnalyticsTracker.jsx';
 export const ThemeContext = createContext();
 
 function App() {
-  // TODO: Add good bg
-  // TODO: Make Navbar responsive
-  // DONE: Make Contacts functional (Edge cases + setup)
-  // DONE: Make theme toggler
-  // TODO: Add hover effects
-  // TODO: ga4 testing + more setup
-  // TODO: All external link opens up in new tab
-  // TODO: Animated cursor-follow background (particles, blobs, or subtle grid)
-  // TODO: Add My info
-
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
+  console.log('App component rendered');
+  const particlesContainerRef = useRef(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
 
   useEffect(() => {
-    if (theme === "dark") {
-    document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme)
-    }, [theme]);
+    console.log('Theme updated:', theme);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(theme == "light" ? "dark" : "light");
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
+  const particlesOptions = useMemo(() => {
+    console.log('particlesOptions computed');
+    return {
+      background: {
+        color: theme === 'dark' ? '#1c1c1c' : '#fafafa',
+      },
+      fpsLimit: 60,
+      particles: {
+        number: {
+          value: 80,
+          density: { enable: true, value_area: 800 },
+        },
+        color: { value: theme === 'dark' ? '#ffffff' : '#000000' },
+        shape: { type: 'circle' },
+        opacity: {
+          value: { min: 0.3, max: 0.6 },
+          // value: 0.6,
+          random: true,
+          // animation: { enable: true, speed: 0.5, minimumValue: 0.5 },
+          anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false },
+        },
+        size: {
+          value: { min: 2.5, max: 3},
+          random: true,
+          // animation: { enable: true, speed: 2, minimumValue: 2 },
+          anim: { enable: true, speed: 2, size_min: 1, sync: false },
+        },
+        links: {
+          // enable: true,
+          // distance: 130,
+          // color: theme === 'dark' ? '#ffffff' : '#000000',
+          // opacity: 0.4,
+          // width: 1,
+           enable: true,
+          distance: 180,
+          color: theme === 'dark' ? '#00BFFF' : '#1a73e8',
+          opacity: 0.2,
+          width: 1,
+        },
+        move: {
+          // enable: true,
+          // speed: 1.05,
+          // direction: 'none',
+          // random: false,
+          // straight: false,
+          // outModes: { default: 'out' },
+          enable: true,
+          speed: 1,           // slow and calming
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+        },
+      },
+      // interactivity: {
+      //   detectsOn: 'canvas',
+      //   events: {
+      //     onHover: { enable: true, mode: 'repulse' },
+      //     onClick: { enable: false },
+      //     resize: { enable: true },
+      //   },
+      //   modes: {
+      //     repulse: { distance: 120, duration: 0.4 },
+      //   },
+      // },
+//       interactivity: {
+//   // detectsOn: 'canvas',
+//   events: {
+//     onHover: { enable: true, mode: ['repulse', 'grab'] },
+//     onClick: { enable: true, mode: ['push', 'remove'] },
+//     resize: { enable: true },
+//   },
+//   modes: {
+//     repulse: { distance: 150, duration: 0.4 },
+//     grab: { distance: 200, line_linked: { opacity: 0.5 } },
+//     push: { particles_nb: 4 },
+//     remove: { particles_nb: 2 },
+//   },
+// },
+      interactivity: {
+  // detectsOn: 'canvas',
+  events: {
+    onHover: {
+      enable: true,
+      mode: ['bubble', 'grab'],   // subtle line connection on hover
+    },
+    onClick: {
+      enable: false,  // clicks won’t trigger anything; keeps focus on content
+    },
+    resize: { enable: true }, // responsive
+  },
+  modes: {
+    grab: {
+      distance: 150,       // how far lines stretch
+      line_linked: {
+        opacity: 0.2,      // very subtle lines
+        color: '#00BFFF',  // matches your accent/theme
+      },
+    },
+    bubble: {
+      distance: 100,   // radius around cursor to trigger
+      size: 6,         // how much the particle grows
+      opacity: 0.8,    // opacity on hover
+      duration: 2,     // smooth fade back to original
+      color: '#00BFFF' // optional: changes particle color temporarily
+    },
+  },
+},
+      detectRetina: true,
+    };
+  }, [theme]);
+
+  useEffect(() => {
+    console.log('Particles useEffect started');
+    const initParticles = async () => {
+      if (!particlesContainerRef.current) {
+        console.log('Particles container ref not found');
+        return;
+      }
+      console.log('Initializing tsParticles...');
+      try {
+        await loadSlim(tsParticles);
+        console.log('loadSlim completed');
+        const container = await tsParticles.load({
+          id: 'tsparticles',
+          element: particlesContainerRef.current,
+          options: particlesOptions,
+        });
+        console.log('tsParticles loaded:', container ? 'Container created' : 'No container');
+        const canvas = particlesContainerRef.current.querySelector('canvas');
+        if (canvas) {
+          console.log('Canvas found:', {
+            width: canvas.width,
+            height: canvas.height,
+            style: {
+              position: canvas.style.position,
+              top: canvas.style.top,
+              left: canvas.style.left,
+              width: canvas.style.width,
+              height: canvas.style.height,
+              zIndex: canvas.style.zIndex,
+              display: canvas.style.display,
+              opacity: canvas.style.opacity,
+            },
+          });
+        } else {
+          console.log('Canvas not found in container');
+        }
+      } catch (error) {
+        console.error('tsParticles failed to load:', error);
+      }
+    };
+
+    initParticles();
+
+    return () => {
+      console.log('Cleaning up tsParticles');
+      const container = tsParticles.dom().find((c) => c.id === 'tsparticles');
+      if (container) {
+        container.destroy();
+      }
+    };
+  }, [particlesOptions]);
+
+  // DONE: Add good bg
+  // DONE: Make Navbar responsive +
+  // DONE: Make Contacts functional (Edge cases + setup)
+  // DONE: Make theme toggler
+  // DONE: Add hover effects
+  // DONE: ga4 setup
+  // TODO: Make color consistent (Check line 59)
+  // DONE: All external link opens up in new tab
+  // DONE: Animated cursor-follow background (particles, blobs, or subtle grid) +
+  // TODO: Add My info
+
   return (
-    <div className="min-h-screen bg-[#fafafa] dark:bg-[#1c1c1c]">
-      <AnalyticsTracker/>
-      <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <Navbar />
-      <Hero />
-      <Projects />
-      <AboutMe />
-      <Skills />
-      <Contact  />
+    <div className="relative min-h-screen w-full bg-transparent">
+      {console.log('Rendering particles container')}
+      <div
+        id="tsparticles"
+        ref={particlesContainerRef}
+        className="absolute inset-0 w-full h-full particles-canvas"
+        style={{ minHeight: '100vh', zIndex: -1 }} // Lower z-index
+      />
+      <AnalyticsTracker />
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <Navbar />
+        <Hero />
+        <Projects />
+        <AboutMe />
+        <Skills />
+        <Contact />
       </ThemeContext.Provider>
     </div>
   );

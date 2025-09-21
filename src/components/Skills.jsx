@@ -12,6 +12,7 @@ function Skills() {
     className={`py-20 px-6 relative overflow-hidden ${
         theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"
     }`}
+    style={{ background: 'transparent', zIndex: 0 }}
     >
     <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg width="100%" height="100%" fill="none" stroke="currentColor">
@@ -36,7 +37,7 @@ function Skills() {
             key={i}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: i * 0.2 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
             whileHover={{ scale: 1.1 }}
             className={`flex items-center justify-center p-4 rounded-lg shadow-md ${
             theme === "dark" ? "bg-[#b8f2e6]" : "bg-[#aed9e0]"

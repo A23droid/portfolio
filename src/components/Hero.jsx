@@ -27,14 +27,15 @@ function Hero() {
   id="home"
   className={`min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden transition-colors duration-300 
     ${theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"}`}
+    style={{ background: 'transparent', zIndex: 0 }}
 >
   {/* background circles */}
-  <div className="absolute inset-0 opacity-10 pointer-events-none">
+  {/* <div className="absolute inset-0 opacity-10 pointer-events-none">
     <svg width="100%" height="100%" fill="none" stroke="currentColor">
       <circle cx="10%" cy="20%" r="100" strokeWidth="2" />
       <circle cx="80%" cy="70%" r="150" strokeWidth="2" />
     </svg>
-  </div>
+  </div> */}
 
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -79,7 +80,7 @@ function Hero() {
       whileHover={{ scale: 1.05, boxShadow: "0 4px 15px rgba(0,0,0,0.1)" }}
       whileTap={{ scale: 0.95 }}
       className={`px-6 py-3 rounded-lg font-medium transition-colors duration-300
-        ${theme === "dark" ? "bg-[#b8f2e6] text-[#1c1c1c]" : "bg-[#ffa69e] text-[#5e6472]"}`}
+        ${theme === "dark" ? "bg-[#b8f2e6] text-[#1c1c1c]" : "bg-[#aed9e0] text-[#5e6472]"}`}
     >
       View my resume
     </motion.button>

@@ -10,14 +10,13 @@ function Projects() {
     { title: 'Project 2', description: 'E-commerce platform with seamless UX.', tags: ['Next.js', 'GraphQL', 'MongoDB'] },
     { title: 'Project 3', description: 'Data visualization dashboard.', tags: ['D3.js', 'Express', 'PostgreSQL'] },
   ];
-  {console.log(theme);}
   return (
     <section
       id="projects"
       className={`py-20 px-6 ${
         theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"
       }`}
-      
+      style={{ background: 'transparent', zIndex: 0 }}
     >
       <motion.h2
         initial={{ opacity: 0 }}

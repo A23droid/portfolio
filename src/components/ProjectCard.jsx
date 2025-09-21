@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { FaGithub } from 'react-icons/fa'; // Make sure react-icons is installed
+import { FaGithub } from 'react-icons/fa'; 
 import {useContext} from 'react';
 import { ThemeContext } from '../App';
 
@@ -10,11 +10,12 @@ function ProjectCard({ title, description, tags, link, github }) {
         <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        whileHover={{ scale: 1.05, rotate: 1 }}
+        whileHover={{ scale: 1.1, rotate: 1 }}
         transition={{ duration: 0.5 }}
         className={`backdrop-blur-sm p-6 rounded-lg shadow-lg relative overflow-hidden ${
-            theme === "dark" ? "bg-[#5e6472]/50" : "bg-[#faf3dd]/50"
+            theme === "dark" ? "bg-[#5e6472]/50" : "bg-[#ffffff]"
         }`}
+        // style={{ background: 'transparent', zIndex: 0 }}
         >
         <div className="absolute inset-0 opacity-10">
             <svg width="100%" height="100%" fill="none" stroke="currentColor">
