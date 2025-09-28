@@ -6,7 +6,6 @@ import ReactGA from 'react-ga4';
 function Hero() {
   
     const handleResume = () => {
-      console.log("Resume dekha :)");
 
       ReactGA.event({
       category: "Resume",
@@ -29,13 +28,6 @@ function Hero() {
     ${theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"}`}
     style={{ background: 'transparent', zIndex: 0 }}
 >
-  {/* background circles */}
-  {/* <div className="absolute inset-0 opacity-10 pointer-events-none">
-    <svg width="100%" height="100%" fill="none" stroke="currentColor">
-      <circle cx="10%" cy="20%" r="100" strokeWidth="2" />
-      <circle cx="80%" cy="70%" r="150" strokeWidth="2" />
-    </svg>
-  </div> */}
 
   <motion.div
     initial={{ opacity: 0, y: 50 }}
@@ -51,7 +43,7 @@ function Hero() {
       className={`text-5xl md:text-7xl font-bold mb-4 
         ${theme === "dark" ? "text-[#b8f2e6]" : "text-[#5e6472]"}`}
     >
-      {"John Doe".split("").map((char, i) => (
+      {"Aditya Pillai".split("").map((char, i) => (
         <motion.span
           key={i}
           initial={{ opacity: 0 }}

@@ -5,11 +5,34 @@ import { ThemeContext } from '../App';
 
 function Projects() {
     const {theme, toggleTheme} = useContext(ThemeContext)
+  // const projects = [
+  //   { title: 'Project 1', description: 'A web app built with modern technologies.', tags: ['React', 'Node.js', 'Tailwind'], link: "https://www.google.com", github: "https://www.github.com/A23droid/quick-talk"},
+  //   { title: 'Project 2', description: 'E-commerce platform with seamless UX.', tags: ['Next.js', 'GraphQL', 'MongoDB'] },
+  //   { title: 'Project 3', description: 'Data visualization dashboard.', tags: ['D3.js', 'Express', 'PostgreSQL'] },
+  // ];
   const projects = [
-    { title: 'Project 1', description: 'A web app built with modern technologies.', tags: ['React', 'Node.js', 'Tailwind'], link: "httmp", github: "shabk"},
-    { title: 'Project 2', description: 'E-commerce platform with seamless UX.', tags: ['Next.js', 'GraphQL', 'MongoDB'] },
-    { title: 'Project 3', description: 'Data visualization dashboard.', tags: ['D3.js', 'Express', 'PostgreSQL'] },
-  ];
+  {
+    title: '💸 Budget Buddy',
+    description: 'A minimal, aesthetic budget tracker for students, semi-responsible adults, and everyone in between. Track spending, save smart, and live soft.',
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
+    link: 'https://my-budget-buddy-app.netlify.app/', // replace with your actual live demo link
+    github: 'https://github.com/A23droid/budget-buddy' // replace with your actual GitHub repo
+  },
+  {
+    title: '💬 Quick Talk',
+    description: 'A sleek, responsive real-time chat app built with React and TailwindCSS. Supports light/dark themes, smooth animations, and keyboard shortcuts.',
+    tags: ['React', 'TailwindCSS'],
+    link: 'https://quick-talk-red.vercel.app/', // you already had a demo link, update if needed
+    github: 'https://github.com/A23droid/quick-talk'
+  },
+  {
+    title: '🎮 Terminal Tic-Tac-Toe',
+    description: 'A terminal-based Tic-Tac-Toe game with Player vs Player and 3 levels of bot difficulty. Built in C for a retro CLI experience.',
+    tags: ['C', 'CLI Game', 'Bots'],
+    github: 'https://github.com/A23droid/tic-tac-toe'
+  }
+];
+
   return (
     <section
       id="projects"

@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { useContext } from 'react';
 import { ThemeContext } from '../App';
 
+
 function AboutMe() {
     const {theme, toggleTheme} = useContext(ThemeContext)
   return (
@@ -34,11 +35,11 @@ function AboutMe() {
           : "border-[#5e6472] bg-white"
       }`}
     >
-      {/* <img
-        src="/your-photo.jpg"
+      <img
+        src="/../../public/profile.jpg"
         alt="My Photo"
         className="w-full h-full object-cover"
-      /> */}
+      />
     </motion.div>
   
       </motion.div>

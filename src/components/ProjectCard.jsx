@@ -2,7 +2,8 @@ import { motion } from 'motion/react';
 import { FaGithub } from 'react-icons/fa'; 
 import {useContext} from 'react';
 import { ThemeContext } from '../App';
-
+import { CardContainer, CardBody, CardItem } from "./ui/3d-card";
+import { cn } from "../lib/utils";
 
 function ProjectCard({ title, description, tags, link, github }) {
     const {theme, toggleTheme} = useContext(ThemeContext)
@@ -15,9 +16,8 @@ function ProjectCard({ title, description, tags, link, github }) {
         className={`backdrop-blur-sm p-6 rounded-lg shadow-lg relative overflow-hidden ${
             theme === "dark" ? "bg-[#5e6472]/50" : "bg-[#ffffff]"
         }`}
-        // style={{ background: 'transparent', zIndex: 0 }}
         >
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
             <svg width="100%" height="100%" fill="none" stroke="currentColor">
             <path d="M0 0L200 200M200 0L0 200" strokeWidth="2" />
             </svg>
@@ -60,7 +60,7 @@ function ProjectCard({ title, description, tags, link, github }) {
         <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-2 flex gap-4 items-center"
+            className="mt-2 flex gap-4 items-center "
         >
             {link && (
             <a

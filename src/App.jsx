@@ -190,17 +190,6 @@ function App() {
     };
   }, [particlesOptions]);
 
-  // DONE: Add good bg
-  // DONE: Make Navbar responsive +
-  // DONE: Make Contacts functional (Edge cases + setup)
-  // DONE: Make theme toggler
-  // DONE: Add hover effects
-  // DONE: ga4 setup
-  // TODO: Make color consistent (Check line 59)
-  // DONE: All external link opens up in new tab
-  // DONE: Animated cursor-follow background (particles, blobs, or subtle grid) +
-  // TODO: Add My info
-
   return (
     <div className="relative min-h-screen w-full bg-transparent">
       {console.log('Rendering particles container')}

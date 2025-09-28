@@ -4,7 +4,20 @@ import { ThemeContext } from '../App';
 
 function Skills() {
     const {theme, toggleTheme} = useContext(ThemeContext);
-  const skills = ['React', 'JavaScript', 'Tailwind CSS', 'Node.js'];
+//   const skills = ['React', 'JavaScript', 'Tailwind CSS', 'Node.js'];
+    const skills = [
+  'HTML5',
+  'CSS3',
+  'JavaScript',
+  'React',
+  'Tailwind CSS',
+  'C',
+  'CLI Development',
+  'Git',
+  'GitHub',
+  'UI/UX',
+];
+
 
   return (
     <section
@@ -16,7 +29,7 @@ function Skills() {
     >
     <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg width="100%" height="100%" fill="none" stroke="currentColor">
-        <circle cx="90%" cy="10%" r="100" strokeWidth="2" />
+        {/* <circle cx="90%" cy="10%" r="100" strokeWidth="2" /> */}
         </svg>
     </div>
 
