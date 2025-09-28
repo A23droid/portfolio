@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useContext } from 'react';
 import { ThemeContext } from '../App';
-
+import Profile from "../../public/profile.jpg"
 
 function AboutMe() {
     const {theme, toggleTheme} = useContext(ThemeContext)
@@ -36,7 +36,7 @@ function AboutMe() {
       }`}
     >
       <img
-        src="/../../public/profile.jpg"
+        src= {Profile}
         alt="My Photo"
         className="w-full h-full object-cover"
       />
