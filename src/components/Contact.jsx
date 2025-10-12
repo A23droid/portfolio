@@ -119,7 +119,6 @@ function Contact() {
     >
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <svg width="100%" height="100%" fill="none" stroke="currentColor">
-          {/* <path d="M0 50H200M50 0V200" strokeWidth="2" /> */}
         </svg>
       </div>
 

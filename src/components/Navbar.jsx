@@ -22,6 +22,25 @@ function Navbar() {
     },
   };
 
+  const handleNavClick = (e, item) => {
+    e.preventDefault();
+    const sectionId = item.toLowerCase();
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Close mobile menu first, then scroll after a slight delay
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300); // Delay matches mobile menu transition duration
+      } else {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      console.warn(`Section with ID "${sectionId}" not found`);
+    }
+  };
+
   return (
     <motion.nav
       variants={navVariants}
@@ -29,7 +48,6 @@ function Navbar() {
       animate="visible"
       className={`fixed top-0 left-0 w-full z-50 backdrop-blur-lg shadow-sm transition-all duration-300 
         ${theme === 'dark' ? 'bg-gray-900/90' : 'bg-white/90'}`}
-        // style={{ background: 'transparent', zIndex: 0 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
@@ -51,6 +69,7 @@ function Navbar() {
                 href={`#${item.toLowerCase()}`}
                 variants={linkVariants}
                 whileHover="hover"
+                onClick={(e) => handleNavClick(e, item)}
                 className={`text-base font-medium transition-colors duration-200 ${
                   theme === 'dark'
                     ? 'text-[#b8f2e6]'
@@ -133,7 +152,7 @@ function Navbar() {
                 variants={linkVariants}
                 whileHover="hover"
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, item)}
                 className={`text-base font-medium px-4 py-2 ${
                   theme === 'dark'
                     ? 'text-cyan-100 hover:bg-gray-800'

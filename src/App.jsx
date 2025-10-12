@@ -8,17 +8,18 @@ import AboutMe from './components/AboutMe.jsx';
 import Skills from './components/Skills.jsx';
 import Contact from './components/Contact.jsx';
 import AnalyticsTracker from './components/AnalyticsTracker.jsx';
+import { Analytics } from '@vercel/analytics/react';
 
 export const ThemeContext = createContext();
 
 function App() {
   console.log('App component rendered');
   const particlesContainerRef = useRef(null);
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     console.log('Theme updated:', theme);
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.classList.toggle('dark', theme === 'light');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -54,11 +55,6 @@ function App() {
           anim: { enable: true, speed: 2, size_min: 1, sync: false },
         },
         links: {
-          // enable: true,
-          // distance: 130,
-          // color: theme === 'dark' ? '#ffffff' : '#000000',
-          // opacity: 0.4,
-          // width: 1,
            enable: true,
           distance: 180,
           color: theme === 'dark' ? '#00BFFF' : '#1a73e8',
@@ -66,12 +62,6 @@ function App() {
           width: 1,
         },
         move: {
-          // enable: true,
-          // speed: 1.05,
-          // direction: 'none',
-          // random: false,
-          // straight: false,
-          // outModes: { default: 'out' },
           enable: true,
           speed: 1,           // slow and calming
           direction: 'none',
@@ -80,31 +70,6 @@ function App() {
           out_mode: 'out',
         },
       },
-      // interactivity: {
-      //   detectsOn: 'canvas',
-      //   events: {
-      //     onHover: { enable: true, mode: 'repulse' },
-      //     onClick: { enable: false },
-      //     resize: { enable: true },
-      //   },
-      //   modes: {
-      //     repulse: { distance: 120, duration: 0.4 },
-      //   },
-      // },
-//       interactivity: {
-//   // detectsOn: 'canvas',
-//   events: {
-//     onHover: { enable: true, mode: ['repulse', 'grab'] },
-//     onClick: { enable: true, mode: ['push', 'remove'] },
-//     resize: { enable: true },
-//   },
-//   modes: {
-//     repulse: { distance: 150, duration: 0.4 },
-//     grab: { distance: 200, line_linked: { opacity: 0.5 } },
-//     push: { particles_nb: 4 },
-//     remove: { particles_nb: 2 },
-//   },
-// },
       interactivity: {
   // detectsOn: 'canvas',
   events: {
@@ -199,6 +164,7 @@ function App() {
         className="absolute inset-0 w-full h-full particles-canvas"
         style={{ minHeight: '100vh', zIndex: -1 }} // Lower z-index
       />
+      <Analytics />
       <AnalyticsTracker />
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <Navbar />
