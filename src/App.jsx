@@ -4,6 +4,7 @@ import { loadSlim } from '@tsparticles/slim';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero.jsx';
 import Projects from './components/Projects.jsx';
+import Experience from './components/Experience.jsx';
 import AboutMe from './components/AboutMe.jsx';
 import Skills from './components/Skills.jsx';
 import Contact from './components/Contact.jsx';
@@ -169,6 +170,7 @@ function App() {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <Navbar />
         <Hero />
+        <Experience />
         <Projects />
         <AboutMe />
         <Skills />

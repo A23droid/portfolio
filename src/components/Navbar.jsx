@@ -7,7 +7,7 @@ function Navbar() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = ['Home', 'Projects', 'About', 'Contact'];
+  const navItems = ['Home', 'Projects', 'About', 'Skills', 'Contact'];
 
   const navVariants = {
     hidden: { opacity: 0 },

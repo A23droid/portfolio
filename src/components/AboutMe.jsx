@@ -1,7 +1,8 @@
 import { motion } from 'motion/react';
 import { useContext } from 'react';
 import { ThemeContext } from '../App';
-import Profile from "./../assets/profile.jpg"
+import ProfileDark from "./../assets/profileDark.jpg"
+import ProfileLight from "./../assets/profileLight.jpeg"
 
 function AboutMe() {
     const {theme, toggleTheme} = useContext(ThemeContext)
@@ -35,11 +36,17 @@ function AboutMe() {
           : "border-[#5e6472] bg-white"
       }`}
     >
+      {theme === "dark" ? 
       <img
-        src= {Profile}
+        src= {ProfileDark}
         alt="My Photo"
         className="w-full h-full object-cover"
       />
+    : <img
+        src= {ProfileLight}
+        alt="My Photo"
+        className="w-full h-full object-cover"
+      />}
     </motion.div>
   
       </motion.div>
