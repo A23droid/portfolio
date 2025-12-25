@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { ThemeContext } from '../App';
 import { useContext, useMemo } from 'react';
 import ReactGA from 'react-ga4';
-import { FileText, Mail, ChevronDown } from 'lucide-react';
+import { FileText, Mail } from 'lucide-react';
 
 function Hero() {
   const { theme } = useContext(ThemeContext);

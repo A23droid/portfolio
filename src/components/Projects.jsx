@@ -44,9 +44,7 @@ function Projects() {
     return (
         <section
             id="projects"
-            className={`py-24 px-6 relative overflow-hidden ${
-                theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"
-            }`}
+            className={`py-24 px-6 relative overflow-hidden bg-transparent`}
         >
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -96,7 +94,7 @@ function Projects() {
                             theme === "dark" ? "text-[#b8f2e6]" : "text-[#5e6472]"
                         }`}
                     >
-                        Featured Projects
+                        Projects
                     </motion.h2>
                     <motion.div
                         initial={{ width: 0 }}

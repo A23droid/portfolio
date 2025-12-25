@@ -1,22 +1,22 @@
 # 🌐 Portfolio
 
 A fully responsive, interactive, and animated portfolio website built with **React + Vite**, showcasing my skills, projects, and experience.  
-It’s packed with smooth animations, dynamic visuals, and a dash of personality — just like any good dev site should be 😎
+It’s packed with smooth animations, dynamic visuals, and a dash of personality, just like any good dev site should be :)
 
 ---
 
 ## 🚀 Features
 
-- 🎨 **Responsive Design** — works flawlessly across devices (mobile, tablet, desktop).  
-- 🧩 **Interactive Particle Background** — powered by `ts-particles`, follows your cursor and adds that ✨ vibe.  
-- 🌗 **Theme Toggler** — switch between light and dark modes effortlessly.  
-- 🌀 **Smooth Animations** — crafted using `GSAP` and `Framer Motion` for fluid transitions.  
-- 🦴 **Skeleton Loader Animation** — sleek loading screen before content renders.  
-- 📊 **Google Analytics 4 (GA4)** — integrated for visitor insights.  
+- 🎨 **Responsive Design**: works flawlessly across devices (mobile, tablet, desktop).  
+- 🧩 **Interactive Particle Background**: powered by `ts-particles`, follows your cursor and adds that ✨ vibe.  
+- 🌗 **Theme Toggler**: switch between light and dark modes effortlessly.  
+- 🌀 **Smooth Animations**: crafted using `GSAP` and `Framer Motion` for fluid transitions.  
+- 🦴 **Skeleton Loader Animation**: sleek loading screen before content renders.  
+- 📊 **Google Analytics 4 (GA4)**: integrated for visitor insights.  
   > ⚠️ Note: May show console warnings if your browser has tracking prevention enabled.  
-- 📜 **Resume Section** — instantly view or download my resume.  
-- 💡 **Skills & Projects** — organized showcase of my technical stack and works.  
-- 📬 **Contact Form** — powered by `EmailJS` for direct messages without exposing email.  
+- 📜 **Resume Section**: instantly view or download my resume.  
+- 💡 **Skills & Projects**: organized showcase of my technical stack and works.  
+- 📬 **Contact Form**: powered by `EmailJS` for direct messages without exposing email.  
 
 ---
 
@@ -52,7 +52,7 @@ npm run build
 ---
 ## 🧠 Notes
 - 🧾 Integrated **Google Analytics 4 (GA4)** and **Vercel Web Analytics** for tracking user engagement.
-- ⚠️ GA4 may show console warnings if tracking is blocked by your browser — totally normal.
+- ⚠️ GA4 may show console warnings if tracking is blocked by your browser, totally normal.
 - ⏳ The skeleton loader might slightly increase LCP, but it keeps the loading experience smooth and elegant.
 ---
 

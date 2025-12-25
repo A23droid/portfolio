@@ -10,9 +10,7 @@ function AboutMe() {
     return (
         <section
             id="about"
-            className={`py-24 px-6 relative overflow-hidden ${
-                theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"
-            }`}
+            className={`py-24 px-6 relative overflow-hidden bg-transparent`}
         >
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -146,6 +144,7 @@ function AboutMe() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.3 }}
+                            className="text-center mb-16"
                         >
                             <motion.h2
                                 className={`text-5xl md:text-6xl font-bold mb-6 ${
@@ -157,10 +156,10 @@ function AboutMe() {
                             
                             <motion.div
                                 initial={{ width: 0 }}
-                                whileInView={{ width: "5rem" }}
+                                whileInView={{ width: "6rem" }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
-                                className={`h-1.5 rounded-full mb-8 ${
+                                className={`h-1.5 rounded-full mx-auto mb-8 ${
                                     theme === "dark" ? "bg-[#b8f2e6]" : "bg-[#aed9e0]"
                                 }`}
                             />

@@ -163,7 +163,7 @@ function App() {
         id="tsparticles"
         ref={particlesContainerRef}
         className="absolute inset-0 w-full h-full particles-canvas"
-        style={{ minHeight: '100vh', zIndex: -1 }} // Lower z-index
+        style={{ minHeight: '100vh', zIndex: -10 }} // Lower z-index
       />
       <Analytics />
       <AnalyticsTracker />

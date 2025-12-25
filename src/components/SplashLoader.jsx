@@ -14,110 +14,144 @@ const SplashLoader = ({ onAnimationComplete }) => {
   useEffect(() => {
     const svgElement = svgRef.current;
     const container = containerRef.current;
-    if (!svgElement || !container) {
-      return;
-    }
+    
+    if (!svgElement || !container) return;
 
     // Select all stroke-based elements
     const paths = svgElement.querySelectorAll('path, line, polyline, circle, ellipse');
 
-    if (paths.length === 0) {
-      return;
-    }
+    if (paths.length === 0) return;
 
-    // Initialize paths to be invisible
-    paths.forEach((path, index) => {
+    // Initialize paths
+    paths.forEach((path) => {
       const length = path.getTotalLength?.();
-      if (isNaN(length) || !length) {
-        return;
-      }
+      if (isNaN(length) || !length) return;
 
-      // Clear all inline attributes
+      // Clear inline attributes
       path.removeAttribute('fill');
       path.removeAttribute('stroke');
       path.removeAttribute('stroke-width');
       path.removeAttribute('stroke-dasharray');
       path.removeAttribute('stroke-dashoffset');
 
-      // Set initial styles with GSAP
+      // Set initial state
       gsap.set(path, {
         strokeDasharray: length,
         strokeDashoffset: length,
         strokeLinecap: 'round',
+        strokeLinejoin: 'round',
         fill: 'none',
         stroke: '#b8f2e6',
-        strokeWidth: 0.5,
+        strokeWidth: 1,
       });
     });
 
-    // Ensure SVG and container are visible
-    gsap.set([svgElement, container], {
-      opacity: 1,
-      visibility: 'visible',
-      position: 'fixed',
-      zIndex: 100000,
-    });
-
-    // Remove fill from group
+    // Remove fill from groups
     svgElement.querySelectorAll('g').forEach((g) => {
       g.removeAttribute('fill');
       g.style.fill = 'none';
     });
 
-    // Create a GSAP timeline for stroke animation
+    // Create main timeline
     const tl = gsap.timeline({
-      delay: 0.5,
       onComplete: () => {
-        setTimeout(() => {
-          setIsMounted(false);
-          if (onAnimationComplete) onAnimationComplete();
-        }, 3000); // Increased delay to 3 seconds
+        // Fade out animation
+        gsap.to(container, {
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            setIsMounted(false);
+            if (onAnimationComplete) onAnimationComplete();
+          }
+        });
       },
     });
 
+    // Signature draw animation
     tl.to(paths, {
       strokeDashoffset: 0,
-      duration: 3,
+      duration: 2.5,
       ease: 'power2.inOut',
-      stagger: 0.2,
-    });
+      stagger: {
+        each: 0.15,
+        ease: 'power1.inOut'
+      },
+    })
+    // Add a subtle glow effect
+    .to(paths, {
+      filter: 'drop-shadow(0 0 8px rgba(184, 242, 230, 0.6))',
+      duration: 0.4,
+      ease: 'power2.out',
+    }, '-=0.5')
+    // Hold for a moment
+    .to({}, { duration: 0.8 });
 
-    return () => {};
-  }, []);
+    return () => {
+      tl.kill();
+    };
+  }, [onAnimationComplete]);
+
+  if (!isMounted) return null;
 
   return (
-    isMounted && (
+    <div
+      ref={containerRef}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#1c1c1c',
+        zIndex: 100000,
+        opacity: 1,
+      }}
+    >
+      {/* Animated background gradient */}
       <div
-        ref={containerRef}
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          backgroundColor: '#1c1c1c',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          zIndex: 100000,
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(184, 242, 230, 0.1) 0%, transparent 70%)',
+          animation: 'pulse 3s ease-in-out infinite',
+          pointerEvents: 'none',
         }}
-      >
-        <SignatureSVG
-          ref={svgRef}
-          style={{
-            width: '300px',
-            height: 'auto',
-            stroke: '#222',
-            fill: 'none',
-            strokeWidth: 1.5,
-            opacity: 1,
-            visibility: 'visible',
-            position: 'fixed',
-            zIndex: 100000,
-          }}
-        />
-      </div>
-    )
+      />
+
+      <SignatureSVG
+        ref={svgRef}
+        style={{
+          width: '320px',
+          height: 'auto',
+          stroke: '#b8f2e6',
+          fill: 'none',
+          strokeWidth: 1,
+          position: 'relative',
+          zIndex: 1,
+        }}
+      />
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            opacity: 0.5;
+            transform: translate(-50%, -50%) scale(1.1);
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 
