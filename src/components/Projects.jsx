@@ -6,29 +6,29 @@ import { ThemeContext } from '../App';
 function Projects() {
     const { theme } = useContext(ThemeContext);
     
-    const projects = [
-        {
-            title: 'Budget Buddy',
-            description: 'Developed a responsive personal finance web application that enables users to set monthly budgets, track categorized expenses, and monitor spending in real time.',
-            tags: ['HTML5', 'CSS3', 'JavaScript'],
-            link: 'https://my-budget-buddy-app.netlify.app/', 
-            github: 'https://github.com/A23droid/budget-buddy' 
-        },
-        {
-            title: 'Quick Talk',
-            description: 'A sleek, responsive real-time chat app built with React and TailwindCSS. Supports light/dark themes, smooth animations, and keyboard shortcuts.',
-            tags: ['React', 'TailwindCSS'],
-            link: 'https://quick-talk-red.vercel.app/', 
-            github: 'https://github.com/A23droid/quick-talk'
-        },
-        {
-            title: 'The LogBook',
-            description: 'Built a developer-focused blog featuring dynamic routing, tag-based filtering, and Markdown-driven content. Implemented a consistent dark-theme UI and deployed the production build on Vercel.',
-            tags: ['Astro', 'React', 'TailwindCSS'],
-            link: 'https://the-logbook-seven.vercel.app/',
-            github: 'https://github.com/A23droid/the-logbook'
-        }
-    ];
+   const projects = [
+    {
+        title: 'Breathe Map',
+        description: 'Smart-city air quality simulation platform featuring GIS-based zone creation, AQI visualization dashboards, reusable UI components, and real-time integration with ML-generated air quality predictions.',
+        tags: ['Next.js', 'TypeScript', 'Leaflet.js', 'TailwindCSS', 'React'],
+        link: 'https://breathe-map-w.vercel.app/',
+        github: 'https://github.com/A23droid/breathe-map'
+    },
+    {
+        title: 'The LogBook',
+        description: 'Developer-focused blogging platform built with Astro Content Collections featuring Markdown-driven content, dynamic routing, tag-based filtering, and a polished dark-theme developer experience.',
+        tags: ['Astro', 'React', 'TailwindCSS', 'Vite', 'Markdown'],
+        link: 'https://the-logbook-seven.vercel.app/',
+        github: 'https://github.com/A23droid/the-logbook'
+    },
+    {
+        title: 'Eco-Classify',
+        description: 'AI-powered e-waste classification dashboard with reusable React components, interactive model comparison visualizations, dataset filtering, and backend-integrated prediction workflows.',
+        tags: ['React', 'JavaScript', 'TailwindCSS', 'Recharts'],
+        link: 'https://eco-classify-one.vercel.app/',
+        github: 'https://github.com/A23droid/e-waste-classifier'
+    }
+];
 
     const containerVariants = {
         hidden: { opacity: 0 },
