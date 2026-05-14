@@ -35,7 +35,7 @@ function Hero() {
   return (
     <section
       id="home"
-      className={`min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden ${
+      className={`min-h-[100dvh] flex items-center justify-center px-6 py-20 relative overflow-hidden ${
         theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"
       }`}
     >

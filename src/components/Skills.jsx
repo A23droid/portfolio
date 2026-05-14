@@ -45,7 +45,8 @@ function Skills() {
         icon: Database,
         skills: [
             'MongoDB',
-            'SQL'
+            'SQL',
+            'Supabase'
         ]
     },
     {

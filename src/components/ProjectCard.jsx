@@ -3,8 +3,22 @@ import { FaGithub } from 'react-icons/fa';
 import { useContext } from 'react';
 import { ThemeContext } from '../App';
 
-function ProjectCard({ title, description, tags, link, github }) {
+function ProjectCard({ project, onClick, isCompact = false }) {
     const { theme } = useContext(ThemeContext);
+
+    const {
+        title,
+        shortDescription,
+        tags,
+        live,
+        github,
+        featured
+    } = project;
+
+    // Truncate description for compact cards (much shorter)
+    const displayDescription = isCompact && shortDescription.length > 120
+        ? shortDescription.substring(0, 120) + '...'
+        : shortDescription;
     
     return (
         <motion.div
@@ -12,14 +26,23 @@ function ProjectCard({ title, description, tags, link, github }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            whileHover={{ y: -8 }}
-            className="group relative h-full"
+            whileHover={{ y: isCompact ? -3 : -8 }}
+            className="group relative h-full cursor-pointer"
+            onClick={onClick}
         >
-            {/* Card container */}
-            <div className={`h-full p-8 rounded-3xl backdrop-blur-sm border-2 transition-all duration-500 relative overflow-hidden ${
+            {/* Card container - Adaptive padding and border */}
+            <div className={`h-full rounded-3xl backdrop-blur-sm transition-all duration-500 relative overflow-hidden ${
+                isCompact 
+                    ? 'p-5 border' 
+                    : 'p-8 border-2'
+            } ${
                 theme === "dark" 
-                    ? "bg-[#5e6472]/30 border-[#b8f2e6]/20 hover:border-[#b8f2e6]/50 hover:bg-[#5e6472]/50" 
-                    : "bg-white/80 border-[#aed9e0]/30 hover:border-[#aed9e0]/60 hover:bg-white"
+                    ? isCompact
+                        ? "bg-[#5e6472]/20 border-[#b8f2e6]/15 hover:border-[#b8f2e6]/30 hover:bg-[#5e6472]/30"
+                        : "bg-[#5e6472]/30 border-[#b8f2e6]/20 hover:border-[#b8f2e6]/50 hover:bg-[#5e6472]/50"
+                    : isCompact
+                        ? "bg-white/60 border-[#aed9e0]/20 hover:border-[#aed9e0]/40 hover:bg-white/80"
+                        : "bg-white/80 border-[#aed9e0]/30 hover:border-[#aed9e0]/60 hover:bg-white"
             }`}>
                 {/* Animated gradient overlay */}
                 <motion.div
@@ -30,42 +53,52 @@ function ProjectCard({ title, description, tags, link, github }) {
                     }`}
                 />
 
-                {/* Decorative corner accent */}
-                <motion.div
-                    className={`absolute top-0 right-0 w-32 h-32 rounded-bl-full opacity-20 ${
-                        theme === "dark" ? "bg-[#b8f2e6]" : "bg-[#aed9e0]"
-                    }`}
-                    animate={{
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 90, 0],
-                    }}
-                    transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                />
+                {/* Decorative corner accent - Only for featured */}
+                {!isCompact && (
+                    <motion.div
+                        className={`absolute top-0 right-0 w-32 h-32 rounded-bl-full opacity-20 ${
+                            theme === "dark" ? "bg-[#b8f2e6]" : "bg-[#aed9e0]"
+                        }`}
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            rotate: [0, 90, 0],
+                        }}
+                        transition={{
+                            duration: 10,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    />
+                )}
 
                 <div className="relative z-10 flex flex-col h-full">
-                    {/* Title */}
+                    {/* Title - Adaptive sizing */}
                     <motion.h3
-                        className={`text-2xl md:text-3xl font-bold mb-4 ${
+                        className={`font-bold ${
+                            isCompact 
+                                ? 'text-lg md:text-xl mb-2' 
+                                : 'text-2xl md:text-3xl mb-4'
+                        } ${
                             theme === "dark" ? "text-[#b8f2e6]" : "text-[#5e6472]"
                         }`}
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={{ scale: isCompact ? 1.01 : 1.02 }}
                     >
                         {title}
                     </motion.h3>
 
-                    {/* Description */}
-                    <p className={`mb-6 leading-relaxed flex-grow ${
+                    {/* Description - Adaptive spacing and line clamp */}
+                    <p className={`leading-relaxed flex-grow ${
+                        isCompact 
+                            ? 'mb-3 text-xs md:text-sm line-clamp-2 opacity-75' 
+                            : 'mb-6 opacity-90'
+                    } ${
                         theme === "dark" ? "text-[#aed9e0]" : "text-[#5e6472]"
-                    } opacity-90`}>
-                        {description}
+                    }`}>
+                        {displayDescription}
                     </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    {/* Tags - Adaptive sizing */}
+                    <div className={`flex flex-wrap gap-1.5 ${isCompact ? 'mb-3' : 'gap-2 mb-6'}`}>
                         {tags.map((tag, i) => (
                             <motion.span
                                 key={i}
@@ -73,8 +106,12 @@ function ProjectCard({ title, description, tags, link, github }) {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.05 }}
-                                whileHover={{ scale: 1.1 }}
-                                className={`px-3 py-1.5 rounded-full text-sm font-semibold transition-all ${
+                                whileHover={{ scale: isCompact ? 1.05 : 1.1 }}
+                                className={`rounded-full font-semibold transition-all ${
+                                    isCompact 
+                                        ? 'px-2.5 py-1 text-xs' 
+                                        : 'px-3 py-1.5 text-sm'
+                                } ${
                                     theme === "dark"
                                         ? "bg-[#b8f2e6]/20 text-[#b8f2e6] hover:bg-[#b8f2e6]/30"
                                         : "bg-[#aed9e0]/40 text-[#5e6472] hover:bg-[#aed9e0]/60"
@@ -85,16 +122,21 @@ function ProjectCard({ title, description, tags, link, github }) {
                         ))}
                     </div>
 
-                    {/* Links */}
-                    <div className="flex gap-4 items-center pt-4 border-t-2 border-opacity-20 border-current">
-                        {link && (
+                    {/* Links - Adaptive spacing */}
+                    <div className={`flex gap-4 items-center border-t-2 border-opacity-20 border-current ${
+                        isCompact ? 'pt-3' : 'pt-4'
+                    }`}>
+                        {live && (
                             <motion.a
-                                href={link}
+                                href={live}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
                                 whileHover={{ scale: 1.05, x: 5 }}
                                 whileTap={{ scale: 0.95 }}
                                 className={`flex items-center gap-2 font-semibold transition-colors group/link ${
+                                    isCompact ? 'text-sm' : ''
+                                } ${
                                     theme === "dark" 
                                         ? "text-[#b8f2e6] hover:text-[#aed9e0]" 
                                         : "text-[#5e6472] hover:text-[#aed9e0]"
@@ -102,7 +144,9 @@ function ProjectCard({ title, description, tags, link, github }) {
                             >
                                 <span>View Live</span>
                                 <svg 
-                                    className="w-4 h-4 transition-transform group-hover/link:translate-x-1" 
+                                    className={`transition-transform group-hover/link:translate-x-1 ${
+                                        isCompact ? 'w-3.5 h-3.5' : 'w-4 h-4'
+                                    }`}
                                     fill="none" 
                                     stroke="currentColor" 
                                     viewBox="0 0 24 24"
@@ -116,7 +160,8 @@ function ProjectCard({ title, description, tags, link, github }) {
                                 href={github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                whileHover={{ scale: 1.15, rotate: 360 }}
+                                onClick={(e) => e.stopPropagation()}
+                                whileHover={{ scale: 1.15, rotate: isCompact ? 180 : 360 }}
                                 whileTap={{ scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
                                 className={`p-2 rounded-lg transition-all ${
@@ -126,27 +171,27 @@ function ProjectCard({ title, description, tags, link, github }) {
                                 }`}
                                 aria-label="View GitHub repository"
                             >
-                                <FaGithub size={24} />
+                                <FaGithub size={isCompact ? 20 : 24} />
                             </motion.a>
                         )}
                     </div>
                 </div>
 
-                {/* Hover shine effect */}
+                {/* Hover shine effect - Slightly toned down for compact */}
                 <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
                     style={{
                         background: theme === "dark"
-                            ? "linear-gradient(135deg, transparent 0%, rgba(184, 242, 230, 0.1) 50%, transparent 100%)"
-                            : "linear-gradient(135deg, transparent 0%, rgba(174, 217, 224, 0.15) 50%, transparent 100%)"
+                            ? `linear-gradient(135deg, transparent 0%, rgba(184, 242, 230, ${isCompact ? '0.05' : '0.1'}) 50%, transparent 100%)`
+                            : `linear-gradient(135deg, transparent 0%, rgba(174, 217, 224, ${isCompact ? '0.08' : '0.15'}) 50%, transparent 100%)`
                     }}
                     animate={{
                         x: ['-100%', '100%'],
                     }}
                     transition={{
-                        duration: 2,
+                        duration: isCompact ? 2.5 : 2,
                         repeat: Infinity,
-                        repeatDelay: 1,
+                        repeatDelay: isCompact ? 1.5 : 1,
                         ease: "easeInOut"
                     }}
                 />

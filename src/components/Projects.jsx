@@ -1,34 +1,28 @@
 import { motion } from 'motion/react';
 import ProjectCard from './ProjectCard';
-import { useContext } from 'react';
+import ProjectModal from './ProjectModal';
+import { useContext, useState } from 'react';
 import { ThemeContext } from '../App';
+import { projectsData } from '../data/projectsData';
 
 function Projects() {
     const { theme } = useContext(ThemeContext);
-    
-   const projects = [
-    {
-        title: 'Breathe Map',
-        description: 'Smart-city air quality simulation platform featuring GIS-based zone creation, AQI visualization dashboards, reusable UI components, and real-time integration with ML-generated air quality predictions.',
-        tags: ['Next.js', 'TypeScript', 'Leaflet.js', 'TailwindCSS', 'React'],
-        link: 'https://breathe-map-w.vercel.app/',
-        github: 'https://github.com/A23droid/breathe-map'
-    },
-    {
-        title: 'The LogBook',
-        description: 'Developer-focused blogging platform built with Astro Content Collections featuring Markdown-driven content, dynamic routing, tag-based filtering, and a polished dark-theme developer experience.',
-        tags: ['Astro', 'React', 'TailwindCSS', 'Vite', 'Markdown'],
-        link: 'https://the-logbook-seven.vercel.app/',
-        github: 'https://github.com/A23droid/the-logbook'
-    },
-    {
-        title: 'Eco-Classify',
-        description: 'AI-powered e-waste classification dashboard with reusable React components, interactive model comparison visualizations, dataset filtering, and backend-integrated prediction workflows.',
-        tags: ['React', 'JavaScript', 'TailwindCSS', 'Recharts'],
-        link: 'https://eco-classify-one.vercel.app/',
-        github: 'https://github.com/A23droid/e-waste-classifier'
-    }
-];
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const featuredProjects = projectsData.filter(p => p.featured);
+    const otherProjects = projectsData.filter(p => !p.featured);
+
+    const handleProjectClick = (project) => {
+        setSelectedProject(project);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        // Delay clearing selected project to allow exit animation
+        setTimeout(() => setSelectedProject(null), 300);
+    };
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -44,7 +38,7 @@ function Projects() {
     return (
         <section
             id="projects"
-            className={`py-24 px-6 relative overflow-hidden bg-transparent`}
+            className="py-24 px-6 relative overflow-hidden bg-transparent"
         >
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -118,18 +112,70 @@ function Projects() {
                     </motion.p>
                 </motion.div>
 
-                {/* Projects Grid */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-100px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                    {projects.map((project, i) => (
-                        <ProjectCard key={i} {...project} />
-                    ))}
-                </motion.div>
+                {/* Featured Projects */}
+                {featuredProjects.length > 0 && (
+                    <div className="mb-16">
+                        <motion.h3
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                            className={`text-2xl md:text-3xl font-bold mb-8 ${
+                                theme === "dark" ? "text-[#b8f2e6]" : "text-[#5e6472]"
+                            }`}
+                        >
+                            Featured Projects
+                        </motion.h3>
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-100px" }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        >
+                            {featuredProjects.map((project, i) => (
+                                <ProjectCard 
+                                    key={project.id} 
+                                    project={project}
+                                    onClick={() => handleProjectClick(project)}
+                                />
+                            ))}
+                        </motion.div>
+                    </div>
+                )}
+
+                {/* Other Projects */}
+                {otherProjects.length > 0 && (
+                    <div className="mb-16">
+                        <motion.h3
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5 }}
+                            className={`text-2xl md:text-3xl font-bold mb-8 ${
+                                theme === "dark" ? "text-[#b8f2e6]" : "text-[#5e6472]"
+                            }`}
+                        >
+                            Other Projects
+                        </motion.h3>
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, margin: "-100px" }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        >
+                            {otherProjects.map((project, i) => (
+                                <ProjectCard 
+                                    key={project.id} 
+                                    project={project}
+                                    onClick={() => handleProjectClick(project)}
+                                    isCompact={true}
+                                />
+                            ))}
+                        </motion.div>
+                    </div>
+                )}
 
                 {/* View More Section */}
                 <motion.div
@@ -165,6 +211,13 @@ function Projects() {
                     </motion.a>
                 </motion.div>
             </div>
+
+            {/* Project Modal */}
+            <ProjectModal 
+                project={selectedProject}
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+            />
         </section>
     );
 }
