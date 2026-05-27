@@ -1,10 +1,45 @@
 @import "tailwindcss";
 
-html,
-body {
-  overscroll-behavior: none;
+/* ─── Theme tokens ─────────────────────────────────────────────────────────
+   Declare surface colors as custom properties so every rule that needs
+   the background color references the same source of truth.             */
+:root {
+  --surface-bg: #fafafa;   /* light mode default */
 }
 
+html.dark {
+  --surface-bg: #1c1c1c;   /* dark mode override */
+}
+
+/* ─── Root background (overscroll flash fix) ───────────────────────────────
+   html must have a real, opaque background-color--- never transparent---
+   so the browser has something to show during rubber-band overscroll on
+   iOS/Android. body is transparent so it doesn't interfere with teh
+   particles canvas layering beneath the content tree.                   */
+html {
+  background-color: var(--surface-bg);
+  overscroll-behavior: none;
+  min-height: 100%;
+}
+
+body {
+  background-color: transparent;
+  overscroll-behavior: none;
+  min-height: 100%;
+}
+
+/* ─── App shell ────────────────────────────────────────────────────────────
+   The React root wrapper must not introduce its own background; the html
+   surface color is what shows through. */
+#root,
+.min-h-screen {
+  background: transparent !important;
+}
+
+/* ─── Particles canvas ─────────────────────────────────────────────────────
+   The tsParticles canvas sits at z-index: -1 relative to content but
+   above html's background-color, so the theme surface color shows in any
+   gap where particles don't reach (edges, overscroll area). */
 .particles-canvas canvas {
   position: absolute !important;
   top: 0 !important;
@@ -15,14 +50,17 @@ body {
   pointer-events: auto !important;
 }
 
-/* Ensure components are above particles */
-.navbar, .hero, .projects, .about-me, .skills, .contact {
+/* ─── Content sections ─────────────────────────────────────────────────────
+   Each section is transparent so the particles layer shows through.
+   position: relative + z-index: 0 ensures they stack above the canvas. */
+.navbar,
+.hero,
+.experience,
+.projects,
+.about-me,
+.skills,
+.contact {
   position: relative;
   z-index: 0;
-  background: transparent !important;
-}
-
-/* Prevent root background interference */
-.min-h-screen, html, body, .dark {
   background: transparent !important;
 }

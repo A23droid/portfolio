@@ -9,7 +9,7 @@ function Experience() {
   const experience = {
     title: 'SWE Intern',
     company: 'Labdox',
-    period: 'Nov 2025 – Present',
+    period: 'Dec 2025 – Mar 2026',
     location: 'Pune, India',
     type: 'Remote',
     description: [

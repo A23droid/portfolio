@@ -35,9 +35,7 @@ function Hero() {
   return (
     <section
       id="home"
-      className={`min-h-[100dvh] flex items-center justify-center px-6 py-20 relative overflow-hidden ${
-        theme === "dark" ? "bg-[#1c1c1c]" : "bg-[#fafafa]"
-      }`}
+      className="min-h-[100dvh] flex items-center justify-center px-6 py-20 relative overflow-hidden bg-transparent"
     >
       {/* Optimized background blobs - reduced opacity for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
