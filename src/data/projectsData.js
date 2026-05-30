@@ -148,7 +148,7 @@ export const projectsData = [
 
         github: 'https://github.com/A23droid/budget-buddy',
 
-        live: 'https://budget-buddy-your-link.vercel.app/',
+        live: 'https://my-budget-buddy-app.netlify.app/',
 
         featured: false
     },

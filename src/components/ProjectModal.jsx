@@ -53,9 +53,11 @@ function ProjectModal({ project, isOpen, onClose }) {
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                             className={`relative w-screen h-screen rounded-none md:rounded-none backdrop-blur-sm border-0 md:border-2 overflow-y-auto ${
+                                // theme === 'dark'
+                                //     ? 'bg-[#1c1c1c] md:bg-[#5e6472]/95 md:border-[#b8f2e6]/30'
+                                //     : 'bg-[#fafafa] md:bg-white/95 md:border-[#aed9e0]/40'
                                 theme === 'dark'
-                                    ? 'bg-[#1c1c1c] md:bg-[#5e6472]/95 md:border-[#b8f2e6]/30'
-                                    : 'bg-[#fafafa] md:bg-white/95 md:border-[#aed9e0]/40'
+    ? 'bg-[#1c1c1c]/95 border-[#b8f2e6]/30'  : 'bg-[#fafafa] md:bg-white/95 md:border-[#aed9e0]/40'
                             } shadow-2xl`}
                             onClick={(e) => e.stopPropagation()}
                         >
