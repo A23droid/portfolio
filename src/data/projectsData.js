@@ -111,6 +111,59 @@ export const projectsData = [
         featured: true
     }, 
     {
+        id: 'ship-docs',
+
+        title: 'ShipDocs',
+
+        shortDescription: 'AI-powered README generation platform that analyzes GitHub repositories and automatically produces professional, structured documentation using FastAPI, React, Docker, Azure, and LLMs.',
+
+        fullDescription: 'ShipDocs is a full-stack AI-powered developer productivity platform that transforms GitHub repositories into polished README documentation within seconds. By combining repository structure analysis, GitHub metadata extraction, and large language models, ShipDocs helps developers generate professional project documentation without manually writing README files. The platform features a modern React frontend, FastAPI backend, Dockerized deployment pipeline, and cloud-native hosting using Azure Container Apps.',
+
+        tags: [
+            'React',
+            'TypeScript',
+            'Python',
+            'Docker',
+            'Azure',
+            'TailwindCSS'
+        ],
+
+        features: [
+            'AI-generated README creation from public GitHub repositories',
+            'Repository structure analysis using GitHub API integration',
+            'Support for custom project descriptions and additional context',
+            'Markdown preview and editing workflow for generated documentation',
+            'Responsive frontend built with React, TypeScript, and TailwindCSS',
+            'Cloud deployment using Azure Container Apps and Azure Container Registry',
+            'Dockerized backend for consistent local and production environments',
+            'FastAPI-powered REST API architecture for scalable request handling'
+        ],
+
+        challenges: [
+            'Designing reliable prompts capable of generating high-quality README files across repositories with vastly different structures',
+            'Extracting meaningful repository context while avoiding unnecessary files and noisy directory information',
+            'Managing frontend-backend integration across local development, Docker containers, and cloud deployments',
+            'Configuring Azure Container Registry, Container Apps, environment variables, and production networking',
+            'Implementing secure API communication and resolving CORS issues between independently deployed frontend and backend services',
+            'Building a deployment workflow that remains reproducible and maintainable for future updates'
+        ],
+
+        solutions: [
+            'Developed a repository analysis pipeline that extracts metadata and filtered project structures before AI processing',
+            'Integrated GitHub API lookups with custom preprocessing logic to provide cleaner repository context to the language model',
+            'Containerized the FastAPI backend using Docker and deployed it through Azure Container Registry and Container Apps',
+            'Separated frontend and backend deployment responsibilities using Vercel for frontend hosting and Azure for backend infrastructure',
+            'Implemented environment-based configuration for API endpoints, secrets, and deployment-specific settings',
+            'Configured production-ready CORS policies and cloud environment variables to ensure seamless frontend-backend communication'
+        ],
+
+        github: 'https://github.com/A23droid/ship-docs',
+
+        live: 'https://ship-docs-ai.vercel.app',
+
+        featured: false
+    },
+    {
         id: 'budget-buddy',
 
         title: 'Budget Buddy',
@@ -149,53 +202,6 @@ export const projectsData = [
         github: 'https://github.com/A23droid/budget-buddy',
 
         live: 'https://my-budget-buddy-app.netlify.app/',
-
-        featured: false
-    },
-    {
-        id: 'quick-talk',
-
-        title: 'Quick Talk',
-
-        shortDescription: 'Modern chat-inspired messaging UI built with React and TailwindCSS featuring theme switching, persistent local conversations, smooth animations, and keyboard-friendly interactions.',
-
-        fullDescription: 'Quick Talk is a sleek frontend-focused chat application designed to explore modern messaging UI patterns and responsive interaction design. The project emphasizes clean visual hierarchy, smooth micro-interactions, theme customization, and persistent local chat state using browser storage APIs.',
-
-        tags: [
-            'React',
-            'JavaScript',
-            'TailwindCSS',
-            'LocalStorage',
-        ],
-
-        features: [
-            'Modern messaging interface with responsive chat layout',
-            'Persistent local chat storage using browser LocalStorage',
-            'Dark and light theme switching with smooth transitions',
-            'Keyboard-friendly interactions for improved usability',
-            'Animated UI interactions and hover micro-interactions',
-            'Mobile-responsive layout optimized for smaller devices'
-        ],
-
-        challenges: [
-            'Designing a chat UI that felt modern and responsive without relying on backend infrastructure',
-            'Managing persistent local conversation state while keeping the interface reactive',
-            'Creating smooth theme transitions without visual flickering',
-            'Maintaining clean spacing and readability across mobile and desktop layouts',
-            'Building interactive messaging workflows while keeping the application lightweight'
-        ],
-
-        solutions: [
-            'Implemented component-based UI architecture using reusable React components',
-            'Used LocalStorage persistence with synchronized React state updates for seamless local chat retention',
-            'Built animated theme transitions using TailwindCSS utility classes and smooth state-driven styling',
-            'Designed adaptive layouts and flexible spacing systems to improve responsiveness across devices',
-            'Focused on frontend interaction quality and UX polish instead of unnecessary backend complexity'
-        ],
-
-        github: 'https://github.com/A23droid/quick-talk',
-
-        live: 'https://quick-talk-red.vercel.app/',
 
         featured: false
     }

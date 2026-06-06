@@ -35,6 +35,19 @@ It’s packed with smooth animations, dynamic visuals, and a dash of personality
 - Google Analytics 4  
 
 ---
+# Portfolio Usage Notice
+
+This repository contains the source code for my personal portfolio website.
+
+The repository is public to showcase implementation details and allow others to learn from the code.
+
+Please do not deploy, redistribute, or reuse the portfolio's design, branding, animations, assets, content, or overall structure as your own personal website.
+
+If you are building your own portfolio, please create your own branding, visual identity, layout, and design.
+
+© Aditya Pillai. All Rights Reserved.
+
+---
 
 ## ⚙️ Setup Instructions
 ### 🧩 Install Dependencies
