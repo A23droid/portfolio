@@ -1,31 +1,34 @@
 import { motion } from 'motion/react';
 import { useContext } from 'react';
 import { ThemeContext } from '../App';
-import { Code2, Cpu, Wrench, Monitor, Server,Database, BarChart3 } from 'lucide-react';
+import { Code2, Cpu, Wrench, Monitor, Server,Database, BarChart3, Shield } from 'lucide-react';
 
 function Skills() {
     const { theme } = useContext(ThemeContext);
-    
-    const skillCategories = [
+        const skillCategories = [
     {
         title: 'Frontend',
         icon: Monitor,
         skills: [
-            'HTML5',
-            'CSS3',
             'React',
             'Next.js',
-            'Tailwind CSS',
             'Astro',
-            'Vite'
+            'Tailwind CSS',
+            'DaisyUI',
+            'Framer Motion',
+            'shadcn/ui'
         ]
     },
     {
         title: 'Backend',
         icon: Server,
         skills: [
+            'Node.js',
             'Express.js',
-            'REST APIs'
+            'REST APIs',
+            'Prisma',
+            'Clerk',
+            'JWT'
         ]
     },
     {
@@ -37,16 +40,18 @@ function Skills() {
             'Java',
             'Python',
             'JavaScript',
-            'TypeScript'
+            'TypeScript',
+            'SQL'
         ]
     },
     {
         title: 'Databases',
         icon: Database,
         skills: [
+            'PostgreSQL',
+            'MySQL',
             'MongoDB',
-            'SQL',
-            'Supabase'
+            'NeonDB'
         ]
     },
     {
@@ -56,10 +61,10 @@ function Skills() {
             'Git',
             'GitHub',
             'Linux',
-            'Vercel',
-            'VS Code',
             'Postman',
-            'Command Line'
+            'Vercel',
+            'Supabase',
+            'Appwrite'
         ]
     },
     {
@@ -68,13 +73,11 @@ function Skills() {
         skills: [
             'Leaflet.js',
             'Recharts',
-            'React Hot Toast',
-            'Markdown'
+            'Chart.js'
         ]
     }
-];
-
-    const containerVariants = {
+];   
+const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,

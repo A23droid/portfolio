@@ -1,5 +1,36 @@
 export const projectsData = [
     {
+        id: 'scaffold-ai',
+        title: 'ScaffoldAI',
+        shortDescription: 'AI-powered learning companion that uses Socratic questioning, misconception tracking, and personalized learning analytics to help students build understanding instead of relying on answer-first AI.',
+        fullDescription: 'ScaffoldAI is an AI-driven educational platform designed to act as a personalized tutor. Rather than directly providing solutions, it guides students through problems using Socratic questioning, adaptive hints, and misconception detection. The platform continuously tracks concept mastery, learning patterns, and recurring struggles, while providing actionable insights to teachers and parents through dedicated analytics dashboards.',
+        tags: ['Next.js', 'TypeScript', 'FastAPI', 'PostgreSQL','TailwindCSS', ],
+        features: [
+            'Socratic tutoring system that guides students through problems instead of revealing answers',
+            'Personalized Stuck Maps for tracking recurring misconceptions and weak concepts',
+            'Adaptive hint generation based on student responses and confidence levels',
+            'Concept mastery heatmaps and confidence scoring across subjects',
+            'Teacher dashboard with class-level analytics and misconception insights',
+            'Parent dashboard for monitoring learning progress, strengths, and weaknesses',
+            'Session history and learner profiling for personalized future guidance'
+        ],
+        challenges: [
+            'Designing an AI tutoring workflow that encourages learning without creating frustration',
+            'Tracking misconceptions and concept mastery across multiple learning sessions',
+            'Generating reliable structured outputs from LLMs for educational workflows',
+            'Balancing personalization, analytics, and usability across different user roles'
+        ],
+        solutions: [
+            'Implemented a Socratic tutoring engine that adapts questions based on student understanding',
+            'Built persistent learner profiles and Stuck Maps to track recurring learning gaps',
+            'Added structured output validation and fallback parsing for reliable AI responses',
+            'Designed dedicated student, teacher, and parent dashboards with role-specific insights'
+        ],
+        github: 'https://github.com/A23droid/scaffold-ai',
+        live: 'https://scaffold-ai.vercel.app/',
+        featured: true
+    },
+    {
         id: 'breathe-map',
         title: 'Breathe Map',
         shortDescription: 'Smart-city decision support platform for zone-level air quality simulation, GIS visualization, urban pollution analysis, and emission-reduction scenario planning.',
@@ -78,7 +109,7 @@ export const projectsData = [
 
         live: 'https://the-logbook-seven.vercel.app/',
 
-        featured: true
+        featured: false
     },
     {
         id: 'eco-classify',
